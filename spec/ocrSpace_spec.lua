@@ -1,6 +1,6 @@
 require("busted")
 local Ocr = require("ocrSpace")
-local validApi = "d16ae8619488957"
+local validApi = "d16 ... 57"
 
 describe("Lua OcrSpace unit testing", function()
     describe("Initialize the library", function()
