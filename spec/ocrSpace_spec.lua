@@ -1,6 +1,7 @@
 require("busted")
 local Ocr = require("ocrSpace")
-local validApi = "d16 ... 57"
+local http = require("socket.http")
+local validApi = "d16ae8619488950" -- test apikey
 
 describe("Lua OcrSpace unit testing", function()
     describe("Initialize the library", function()
@@ -34,6 +35,15 @@ describe("Lua OcrSpace unit testing", function()
             local ocr = Ocr(validApi)
             assert.are.equals(type(ocr:get("http://example.com")), "table")
         end)
+        -- it("Should add the options config", function()
+        --     stub(http, "request")
+        --     local url = "http://example.com"
+        --     local options = {
+        --         isOverlayRequired = true,
+        --         isOverlayRequired = false
+        --     }
+        --     assert.stub(http.request).was.called_with({url = url,sink = ltn12.sink.table(response_body)})
+        -- end)
     end)
 
 
