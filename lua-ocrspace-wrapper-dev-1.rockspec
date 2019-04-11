@@ -10,9 +10,8 @@ description = {
    detailed = "A Lua wrapper to make get or post requests to https://ocr.space api",    
 }
 dependencies = {
-   {
     "lua >= 5.1",
-    "socket >= 2.0.2-6",
+    "luasocket >= 2.0.2",
     "lua-cjson >= 2.0",
     "multipart-post >= 1.1"
 }
