@@ -38,7 +38,7 @@ function OcrSpace.new(apiKey, default)
         url = default["url"],
         file = default["file"],
         base64Image = default["base64Image"],
-        language =  "eng",
+        language =  default["language"] or "eng",
         isOverlayRequired = default["isOverlayRequired"],
         filetype = default["filetype"],
         detectOrientation = default["detectOrientation"],
@@ -50,13 +50,13 @@ function OcrSpace.new(apiKey, default)
     return self
 end
 
-function OcrSpace:setDefault(options)
+function OcrSpace:set_default(options)
     for k,v in pairs(options) do
         self.default[k] = v
     end
 end
 
-function OcrSpace:getDefault()
+function OcrSpace:get_default()
     return self.default
 end
 
@@ -117,9 +117,4 @@ function OcrSpace:get(imageUrl, options)
     http.request{url = url,sink = ltn12.sink.table(response_body)}
     return cjson.decode(response_body[1])
 end
-
 return OcrSpace
-
--- local ocr = OcrSpace("d16ae8619488957")
--- local file = io.open("ocr.jpg", "rb")
--- local parsed_img = ocr:get("https://pbs.twimg.com/profile_images/905587271260180480/_mhK2FfR_400x400.jpg")

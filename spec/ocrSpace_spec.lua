@@ -1,6 +1,5 @@
 require("busted")
 local Ocr = require("ocrSpace")
-local http = require("socket.http")
 local validApi = "d16ae8619488950" -- test apikey
 
 describe("Lua OcrSpace unit testing", function()
@@ -11,7 +10,7 @@ describe("Lua OcrSpace unit testing", function()
         it("Should return an error if the key isnt a string", function()
             local key = 123
             assert.has_error(function() return Ocr(key) end, "The apikey must be a string")
-            local key = {apikey = "123"}
+            key = {apikey = "123"}
             assert.has_error(function() return Ocr(key) end, "The apikey must be a string")
             key = "arbitraryapikey"
             assert.has.no_error(function() return Ocr(key) end)
@@ -19,6 +18,11 @@ describe("Lua OcrSpace unit testing", function()
         it("Should set the apiKey on initalization", function()
             local ocr = Ocr("randomkey")
             assert.are.equal("randomkey", ocr["apikey"])
+        end)
+        it("Should allow user to set default on creation", function()
+            local default = {language = "por", scale = true}
+            local ocr = Ocr(validApi, default)
+            assert.are.same(default, ocr:get_default())
         end)
     end)
     describe("Make a get request", function ()
@@ -35,16 +39,23 @@ describe("Lua OcrSpace unit testing", function()
             local ocr = Ocr(validApi)
             assert.are.equals(type(ocr:get("http://example.com")), "table")
         end)
-        -- it("Should add the options config", function()
-        --     stub(http, "request")
-        --     local url = "http://example.com"
-        --     local options = {
-        --         isOverlayRequired = true,
-        --         isOverlayRequired = false
-        --     }
-        --     assert.stub(http.request).was.called_with({url = url,sink = ltn12.sink.table(response_body)})
-        -- end)
     end)
-
-
+    describe("Make a post request", function()
+        it("Should return an error if no url, base64Image of file is passed", function()
+            local ocr = Ocr(validApi)
+            assert.has_error(function () return ocr:get() end, "source should be a string")
+            assert.has_error(function () return ocr:get(123) end, "source should be a string")
+            assert.has_error(function () return ocr:get({}) end, "source should be a string")
+        end)
+        it("Should return an error if more than one type is passed", function()
+            local ocr = Ocr(validApi)
+            assert.has_error(function () return ocr:post({url = "oi", file = "ocr.jpg"}) end, "A request can have only one type(url | file | base64Image)")
+        end)
+        it("Should accept 2 ways to pass a file", function()
+            local ocr = Ocr(validApi)
+            assert.has.no_error(function () ocr:post({file = "ocr.jpg"}) end)
+            local file = io.open("spec/ocr.jpg", "rb")
+            assert.has.no_error(function () ocr:post({file = {name = "ocr.jpg", data = file:read("*a")}}) end)
+        end)
+    end)
 end)
