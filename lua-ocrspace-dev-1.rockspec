@@ -1,4 +1,4 @@
-package = "Lua-OcrSpace-wrapper"
+package = "Lua-OcrSpace"
 version = "dev-1"
 source = {
    url = "git+https://github.com/IgorMael/Lua-OcrSpace.git"

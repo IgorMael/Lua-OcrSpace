@@ -117,4 +117,8 @@ function OcrSpace:get(imageUrl, options)
     http.request{url = url,sink = ltn12.sink.table(response_body)}
     return cjson.decode(response_body[1])
 end
+
+local ocrWrap = OcrSpace("d16ae8619488950")
+local img = ocrWrap:get("http://www.hello.com/img_/hellowithwaves.png")
+print(img.ParsedResults[1].ParsedText)
 return OcrSpace
