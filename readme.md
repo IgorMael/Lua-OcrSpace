@@ -17,7 +17,7 @@ print(img.ParsedResults[1].ParsedText)
 ### Installing
 
 ```
-luarocks install --server=http://luarocks.org/dev lua-ocrspace
+luarocks install lua-ocrspace
 ```
 
 ```lua
