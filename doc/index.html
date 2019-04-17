@@ -1,0 +1,292 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Lua-OcrSpace</title>
+    <link rel="stylesheet" href="ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Local_Functions">Local Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><strong>ocrSpace</strong></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>ocrSpace</code></h1>
+<p>A lua ocr.space wrapper</p>
+<p> Get your key here https://ocr.space/ocrapi
+ @module ocr-space
+ @author IgorMael
+ @license MIT</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#OcrSpace.new">OcrSpace.new (apiKey, default)</a></td>
+	<td class="summary">Define the requisition file type
+ find with key type is present on the function
+ @export
+ @tparam string apiKey The apiKey
+ @tparam table default The default request settings
+ @treturn table An ocrSpace instance
+ @error You must provide an apiKey
+ @error The apikey must be a string</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#OcrSpace:set_default">OcrSpace:set_default (options)</a></td>
+	<td class="summary">Define the default api options
+ @export
+ @tparam table options A table with the new default settings</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#OcrSpace:get_default">OcrSpace:get_default ()</a></td>
+	<td class="summary">Define the requisition file type
+ find with key type is present on the function
+ it also return an error if there is more than one type
+ @export
+ @treturn table a table with the currenty settings</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#OcrSpace:post">OcrSpace:post (source, options)</a></td>
+	<td class="summary">Define the requisition file type
+ find with key type is present on the function
+ @export
+ @tparam table source The source of the request
+ @tparam table options A table with the request settings
+ @error You should specify a url, file or base64Image
+ @treturn table a table with the parsed result</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#OcrSpace:get">OcrSpace:get (imageUrl, options)</a></td>
+	<td class="summary">Define the requisition file type
+ find with key type is present on the function
+ @export
+ @tparam string imageUrl A url to the source image
+ @tparam table options A table with the request settings
+ @treturn table a table with the parsed result
+ @error source should be a string</td>
+	</tr>
+</table>
+<h2><a href="#Local_Functions">Local Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#get_type">get_type (source)</a></td>
+	<td class="summary">Define the requisition file type
+ find with key type is present on the function
+ it also return an error if there is more than one type
+ @local
+ @param source The source of the request
+ @error A request can have only one type(url | file | base64Image)
+ @treturn string a string with the type url | file | base64Image</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "OcrSpace.new"></a>
+    <strong>OcrSpace.new (apiKey, default)</strong>
+    </dt>
+    <dd>
+    Define the requisition file type
+ find with key type is present on the function
+ @export
+ @tparam string apiKey The apiKey
+ @tparam table default The default request settings
+ @treturn table An ocrSpace instance
+ @error You must provide an apiKey
+ @error The apikey must be a string
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">apiKey</span>
+
+        </li>
+        <li><span class="parameter">default</span>
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "OcrSpace:set_default"></a>
+    <strong>OcrSpace:set_default (options)</strong>
+    </dt>
+    <dd>
+    Define the default api options
+ @export
+ @tparam table options A table with the new default settings
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">options</span>
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "OcrSpace:get_default"></a>
+    <strong>OcrSpace:get_default ()</strong>
+    </dt>
+    <dd>
+    Define the requisition file type
+ find with key type is present on the function
+ it also return an error if there is more than one type
+ @export
+ @treturn table a table with the currenty settings
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "OcrSpace:post"></a>
+    <strong>OcrSpace:post (source, options)</strong>
+    </dt>
+    <dd>
+    Define the requisition file type
+ find with key type is present on the function
+ @export
+ @tparam table source The source of the request
+ @tparam table options A table with the request settings
+ @error You should specify a url, file or base64Image
+ @treturn table a table with the parsed result
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">source</span>
+
+        </li>
+        <li><span class="parameter">options</span>
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "OcrSpace:get"></a>
+    <strong>OcrSpace:get (imageUrl, options)</strong>
+    </dt>
+    <dd>
+    Define the requisition file type
+ find with key type is present on the function
+ @export
+ @tparam string imageUrl A url to the source image
+ @tparam table options A table with the request settings
+ @treturn table a table with the parsed result
+ @error source should be a string
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">imageUrl</span>
+
+        </li>
+        <li><span class="parameter">options</span>
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Local_Functions"></a>Local Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "get_type"></a>
+    <strong>get_type (source)</strong>
+    </dt>
+    <dd>
+    Define the requisition file type
+ find with key type is present on the function
+ it also return an error if there is more than one type
+ @local
+ @param source The source of the request
+ @error A request can have only one type(url | file | base64Image)
+ @treturn string a string with the type url | file | base64Image
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">source</span>
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2019-04-17 09:21:04 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

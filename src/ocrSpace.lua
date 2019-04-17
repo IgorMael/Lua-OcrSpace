@@ -1,8 +1,24 @@
+-----------------------
+-- A lua ocr.space wrapper
+--
+-- Get your key here https://ocr.space/ocrapi
+-- @module ocr-space
+-- @author IgorMael
+-- @license MIT
+
+
 local http = require("socket.http")
 local ltn12 = require("ltn12")
 local cjson = require("cjson")
 local encode = (require "multipart-post").encode
 
+--- Define the requisition file type
+-- find with key type is present on the function
+-- it also return an error if there is more than one type
+-- @local
+-- @param source The source of the request
+-- @error A request can have only one type(url | file | base64Image)
+-- @treturn string a string with the type url | file | base64Image
 local function get_type(source)
     local source_type
     local types = {"url", "file", "base64Image"}
@@ -24,6 +40,14 @@ setmetatable(OcrSpace, {
     end,
 })
 
+--- Define the requisition file type
+-- find with key type is present on the function
+-- @export
+-- @tparam string apiKey The apiKey
+-- @tparam table default The default request settings
+-- @treturn table An ocrSpace instance
+-- @error You must provide an apiKey
+-- @error The apikey must be a string
 function OcrSpace.new(apiKey, default)
     if not apiKey then
         error("You must provide an apiKey", 2)
@@ -50,16 +74,31 @@ function OcrSpace.new(apiKey, default)
     return self
 end
 
+--- Define the default api options
+-- @export
+-- @tparam table options A table with the new default settings
 function OcrSpace:set_default(options)
     for k,v in pairs(options) do
         self.default[k] = v
     end
 end
 
+--- Define the requisition file type
+-- find with key type is present on the function
+-- it also return an error if there is more than one type
+-- @export
+-- @treturn table a table with the currenty settings
 function OcrSpace:get_default()
     return self.default
 end
 
+--- Define the requisition file type
+-- find with key type is present on the function
+-- @export
+-- @tparam table source The source of the request
+-- @tparam table options A table with the request settings
+-- @error You should specify a url, file or base64Image
+-- @treturn table a table with the parsed result
 function OcrSpace:post(source, options)
     source = source or self.default["url"] or self.default["file"] or self.default["base64Image"]
     if not source then
@@ -100,6 +139,13 @@ function OcrSpace:post(source, options)
     return cjson.decode(response_body[1])
 end
 
+--- Define the requisition file type
+-- find with key type is present on the function
+-- @export
+-- @tparam string imageUrl A url to the source image
+-- @tparam table options A table with the request settings
+-- @treturn table a table with the parsed result
+-- @error source should be a string
 function OcrSpace:get(imageUrl, options)
     if self.apikey == nil then
         error("apikey not provided. Initialize the library first")
@@ -118,7 +164,4 @@ function OcrSpace:get(imageUrl, options)
     return cjson.decode(response_body[1])
 end
 
-local ocrWrap = OcrSpace("d16ae8619488950")
-local img = ocrWrap:get("http://www.hello.com/img_/hellowithwaves.png")
-print(img.ParsedResults[1].ParsedText)
 return OcrSpace
