@@ -63,9 +63,9 @@ local source = {file = file}
 -- or like this
 local content = file:read("*a")
 source = {file = {name = "file.jpg", data = content}}
-
+```
 #### Using Base64
-```go
+```lua
 func PostBase64(paramTexts Params, base64 string) (ProcessedDoc, error)
 ```
 
