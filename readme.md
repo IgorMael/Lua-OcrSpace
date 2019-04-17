@@ -7,7 +7,7 @@ This module adds a high level wrapper to the [ocrSpace api](https://ocr.space/).
 
 ```lua
 local ocr = Ocr("apikey");
-parsed_image = ocr.get("https://example.com/image.jpg")
+parsed_image = ocr:get("https://example.com/image.jpg")
 print(img.ParsedResults[1].ParsedText)
 ```
 
