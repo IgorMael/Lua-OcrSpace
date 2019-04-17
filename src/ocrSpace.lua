@@ -11,25 +11,24 @@ local http = require("socket.http")
 local ltn12 = require("ltn12")
 local cjson = require("cjson")
 local encode = (require "multipart-post").encode
+local source_types = {
+    "url",
+    "file",
+    "base64Image"
+}
 
 --- Define the requisition file type
 -- find with key type is present on the function
 -- it also return an error if there is more than one type
 -- @local
 -- @param source The source of the request
--- @error A request can have only one type(url | file | base64Image)
 -- @treturn string a string with the type url | file | base64Image
 local function get_type(source)
-    local source_type
-    local types = {"url", "file", "base64Image"}
-    for _, value in ipairs(types) do
+    for _, value in ipairs(source_types) do
         if source[value] then
-            if not source_type then source_type = value
-            else error("A request can have only one type(url | file | base64Image)", 2)
-            end
+            return value
         end
     end
-    return source_type
 end
 
 local OcrSpace = {}
@@ -78,8 +77,8 @@ end
 -- @export
 -- @tparam table options A table with the new default settings
 function OcrSpace:set_default(options)
-    for k,v in pairs(options) do
-        self.default[k] = v
+    for key, value in pairs(options) do
+        self.default[key] = value
     end
 end
 
@@ -92,7 +91,7 @@ function OcrSpace:get_default()
     return self.default
 end
 
---- Define the requisition file type
+--- Do a post request to the api
 -- find with key type is present on the function
 -- @export
 -- @tparam table source The source of the request
@@ -106,12 +105,12 @@ function OcrSpace:post(source, options)
     end
 
     local req_body = {}
-    for k,v in pairs(self.default) do
-        req_body[k] = v
+    for key,value in pairs(self.default) do
+        req_body[key] = value
     end
     if options then
-        for k,v in pairs(options) do
-            req_body[k] = v
+        for key,value in pairs(options) do
+            req_body[key] = value
         end
     end
 
