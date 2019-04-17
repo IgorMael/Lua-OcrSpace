@@ -7,7 +7,7 @@ This module adds a high level wrapper to the [ocrSpace api](https://ocr.space/).
 
 ```lua
 local ocr = Ocr("apikey");
-parsed_image = ocr.get("https://example.com/image.jpg")
+parsed_image = ocr:get("https://example.com/image.jpg")
 print(img.ParsedResults[1].ParsedText)
 ```
 
@@ -63,10 +63,6 @@ local source = {file = file}
 -- or like this
 local content = file:read("*a")
 source = {file = {name = "file.jpg", data = content}}
-
-#### Using Base64
-```go
-func PostBase64(paramTexts Params, base64 string) (ProcessedDoc, error)
 ```
 
 #### Another methods
