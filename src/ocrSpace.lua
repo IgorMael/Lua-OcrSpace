@@ -18,8 +18,7 @@ local source_types = {
 }
 
 --- Define the requisition file type
--- find with key type is present on the function
--- it also return an error if there is more than one type
+-- find which key type is present on the function
 -- @local
 -- @param source The source of the request
 -- @treturn string a string with the type url | file | base64Image
@@ -39,8 +38,7 @@ setmetatable(OcrSpace, {
     end,
 })
 
---- Define the requisition file type
--- find with key type is present on the function
+--- Initialize the api and set the api key
 -- @export
 -- @tparam string apiKey The apiKey
 -- @tparam table default The default request settings
@@ -82,17 +80,14 @@ function OcrSpace:set_default(options)
     end
 end
 
---- Define the requisition file type
--- find with key type is present on the function
--- it also return an error if there is more than one type
+--- Get the current default setting
 -- @export
 -- @treturn table a table with the currenty settings
 function OcrSpace:get_default()
     return self.default
 end
 
---- Do a post request to the api
--- find with key type is present on the function
+--- Do a post request to the api and return the parsed text
 -- @export
 -- @tparam table source The source of the request
 -- @tparam table options A table with the request settings
@@ -138,8 +133,7 @@ function OcrSpace:post(source, options)
     return cjson.decode(response_body[1])
 end
 
---- Define the requisition file type
--- find with key type is present on the function
+--- Make a get request to the Api and return the parsed text
 -- @export
 -- @tparam string imageUrl A url to the source image
 -- @tparam table options A table with the request settings
