@@ -155,7 +155,7 @@ function OcrSpace:get(imageUrl, options)
     if not imageUrl or type(imageUrl) ~= "string" then
         error("source should be a string")
     end
-    url = url .. "apikey=" .. "apikey=" .. self.apikey .. "&url=" .. imageUrl .. "&language=" .. (options["language"] or self.default["language"])
+    url = url .. "apikey=" .. self.apikey .. "&url=" .. imageUrl .. "&language=" .. (options["language"] or self.default["language"])
     if options["isOverlayRequired"] or self.default["isOverlayRequired"] then
         url = url .. "&isOverlayRequired=True"
     end
