@@ -64,10 +64,6 @@ local source = {file = file}
 local content = file:read("*a")
 source = {file = {name = "file.jpg", data = content}}
 ```
-#### Using Base64
-```lua
-func PostBase64(paramTexts Params, base64 string) (ProcessedDoc, error)
-```
 
 #### Another methods
 You can also set the default settings to be used in requests with the set_default method
